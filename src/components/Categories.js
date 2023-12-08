@@ -2,13 +2,13 @@ import { View, StyleSheet, Text, FlatList} from 'react-native'
 import categories from '../data/categories.json' //importo json
 import CategoryItem from './CategoryItem'
 
-const Categories = () => {
+const Categories = ({setCategorySelect}) => {
     return (
         <FlatList
             style = {styles.container}
             data = {categories} //data que quiero recorrer
             keyExtractor={item => item} //clave, en este caso un valor de la lista
-            renderItem={({item})=> <CategoryItem category={item}/>} //renderizar mediante la funcion
+            renderItem={({item})=> <CategoryItem category={item} setCategorySelect={setCategorySelect} />} //renderizar mediante la funcion
         />
     )
 }

@@ -1,23 +1,35 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView} from 'react-native';
 import Home from './src/data/Screen/Home'
 import ItemListCategories from './src/data/Screen/ItemListCategories'
 import Categories from './src/components/Categories';
 import Header from './src/components/Header';
 import ItemDetail from './src/data/Screen/ItemDetail';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const App = () => {
 
   const [categorySelect, setCategorySelect] = useState("")
+  const [productDetailId, setProductDetailId] = useState(0)
+
+
+  useEffect(()=>{
+    console.log(productDetailId)
+  },[productDetailId])
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       {categorySelect ?
-      <ItemListCategories category = {categorySelect}  />
+          productDetailId != 0 ?
+              <ItemDetail productDetailId={productDetailId} setProductDetailId={setProductDetailId}/>
+              :
+              <ItemListCategories 
+                  category = {categorySelect} 
+                  setCategorySelect={setCategorySelect} 
+                  setProductDetailId={setProductDetailId} />
       :
       <Home setCategorySelect={setCategorySelect} />
     }
-    </View>
+    </SafeAreaView>
   );
 }
 

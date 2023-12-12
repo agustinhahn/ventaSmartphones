@@ -1,15 +1,15 @@
-import { FlatList, View, Text, StyleSheet, Image} from 'react-native'
+import { FlatList, View, Text, StyleSheet, Image, Pressable} from 'react-native'
 
-const ProductItem = ({item}) => {
+const ProductItem = ({item,setProductDetailId}) => {
     return (
-        <View style={styles.container}>
+        <Pressable style={styles.container} onPress={()=>setProductDetailId(item.id)}>
+            <Text style={styles.textInput }>{item.title}</Text>
             <Image 
                 style={styles.image}
                 resizeMode='cover'
                 source={{uri:item.thumbnail}}
             />
-            <Text>{item.title}</Text>
-        </View>
+        </Pressable>
     )
 }
 
@@ -26,11 +26,21 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         flexDirection: "row",
         alignItems:"center",
-        justifyContent:"start",
+        justifyContent:"space-between",
         gap: 30
     },
     image:{
-        width: 50,
-        height:50,
+        width: 90,
+        height:90,
+    },
+    textInput:{
+        width:"60%",
+        textAlign:"center",
+        fontSize: 20
+    },
+    textMind: {
+        width:"60%",
+        textAlign:"center",
+        fontSize: 10
     }
 })

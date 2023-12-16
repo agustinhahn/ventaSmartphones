@@ -1,8 +1,8 @@
 import { FlatList, View, Text, StyleSheet, Image, Pressable} from 'react-native'
 
-const ProductItem = ({item,setProductDetailId}) => {
+const ProductItem = ({item, route, navigation}) => {
     return (
-        <Pressable style={styles.container} onPress={()=>setProductDetailId(item.id)}>
+        <Pressable style={styles.container} onPress={()=>navigation.navigate("Product",{id:item.id})}>
             <Text style={styles.textInput }>{item.title}</Text>
             <Image 
                 style={styles.image}

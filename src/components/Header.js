@@ -5,7 +5,7 @@ import {colors} from '../data/Global/colors'
 const Header = ({title= "producto"}) => {
     return (
         <View style={styles.container}>
-            <Text>{title}</Text>
+            <Text style={styles.text}>{title}</Text>
         </View>
     )
 }
@@ -17,7 +17,10 @@ const styles = StyleSheet.create({
         height: 80,
         justifyContent: 'center',
         alignItems: 'center',
-        width: "100%"
+        width: "100%",
     },
+    text: {
+        fontFamily: "Josefin"
+    }
 
 })

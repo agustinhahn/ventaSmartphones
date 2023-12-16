@@ -4,8 +4,8 @@ import Header from '../../components/Header'
 import allProduct from "../products.json"
 import { colors } from '../Global/colors'
 
-const ItemDetail = ({ productDetailId, setProductDetailId }) => {
-
+const ItemDetail = ({route}) => {
+    const {id} = route.params
     const [product, setProduct] = useState({})
 
     const { width, height } = useWindowDimensions()
@@ -21,17 +21,13 @@ const ItemDetail = ({ productDetailId, setProductDetailId }) => {
 
     useEffect(() => {
 
-        const productFinded = allProduct.find(product => product.id === productDetailId)
+        const productFinded = allProduct.find(product => product.id === id)
         setProduct(productFinded)
 
-    }, [productDetailId])
+    }, [id])
 
     return (
         <View style={styles.container}>
-            <Header />
-            <Pressable style={styles.goBack} title='Go back' onPress={() => setProductDetailId(0)}>
-                <Text>Volver</Text>
-            </Pressable>
             <View style={landscape ? styles.contentLandscape : styles.content} >
                 <Image
                     style={landscape ? styles.imageLandscape : styles.image}

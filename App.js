@@ -1,13 +1,14 @@
-import { StyleSheet, Text, View, SafeAreaView} from 'react-native';
-import Home from './src/data/Screen/Home'
-import ItemListCategories from './src/data/Screen/ItemListCategories'
-import Categories from './src/components/Categories';
-import Header from './src/components/Header';
-import ItemDetail from './src/data/Screen/ItemDetail';
+import { StyleSheet, Text, View, SafeAreaView, StatusBar} from 'react-native';
 import { useEffect, useState } from 'react';
+import Navigator from './src/Navigation/Navigator';
+import { useFonts } from 'expo-font';
+import {fonts} from './src/data/Global/fonts'
+
+
 
 const App = () => {
 
+  const [fontLoaded] = useFonts(fonts)
   const [categorySelect, setCategorySelect] = useState("")
   const [productDetailId, setProductDetailId] = useState(0)
 
@@ -17,19 +18,10 @@ const App = () => {
   },[productDetailId])
 
   return (
-    <SafeAreaView style={styles.container}>
-      {categorySelect ?
-          productDetailId != 0 ?
-              <ItemDetail productDetailId={productDetailId} setProductDetailId={setProductDetailId}/>
-              :
-              <ItemListCategories 
-                  category = {categorySelect} 
-                  setCategorySelect={setCategorySelect} 
-                  setProductDetailId={setProductDetailId} />
-      :
-      <Home setCategorySelect={setCategorySelect} />
-    }
-    </SafeAreaView>
+<>
+    <StatusBar />
+    <Navigator />
+</>
   );
 }
 

@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, SafeAreaView, StatusBar} from 'react-native';
 import { useEffect, useState } from 'react';
-import Navigator from './src/Navigation/Navigator';
+import TabNavigator from './src/Navigation/TabNavigator';
 import { useFonts } from 'expo-font';
 import {fonts} from './src/data/Global/fonts'
 
@@ -20,7 +20,7 @@ const App = () => {
   return (
 <>
     <StatusBar />
-    <Navigator />
+    <TabNavigator />
 </>
   );
 }

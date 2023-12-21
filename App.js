@@ -1,38 +1,37 @@
-import { StyleSheet, Text, View, SafeAreaView, StatusBar} from 'react-native';
-import { useEffect, useState } from 'react';
-import TabNavigator from './src/Navigation/TabNavigator';
-import { useFonts } from 'expo-font';
-import {fonts} from './src/data/Global/fonts'
+import { StyleSheet,StatusBar } from 'react-native'
+import { useFonts } from "expo-font"
+import { colors } from './src/Global/colors'
+import { fonts } from './src/Global/fonts'
+import TabNavigator from './src/Navigation/TabNavigator'
+import {store} from "./src/app/store"
+import { Provider } from 'react-redux'
 
 
 
-const App = () => {
+const  App = () => {
 
   const [fontLoaded] = useFonts(fonts)
-  const [categorySelect, setCategorySelect] = useState("")
-  const [productDetailId, setProductDetailId] = useState(0)
-
-
-  useEffect(()=>{
-    console.log(productDetailId)
-  },[productDetailId])
-
+  if(!fontLoaded) return null
+  
   return (
-<>
-    <StatusBar />
-    <TabNavigator />
-</>
-  );
+    <>
+      <StatusBar
+        backgroundColor={colors.green1}
+      />
+      <Provider store={store}>
+        <TabNavigator />
+      </Provider>
+    </>
+  )
 }
 
 export default App
 
 const styles = StyleSheet.create({
   container: {
-    width:"100%",
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'start',
   },
-});
+})

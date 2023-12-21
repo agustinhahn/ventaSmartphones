@@ -1,14 +1,14 @@
-import { StyleSheet } from 'react-native-web';
-import ShopStack from './ShopStack';
-import { NavigationContainer } from '@react-navigation/native';
-import CartStack from './CartStack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { AntDesign } from '@expo/vector-icons';
-import { Entypo } from '@expo/vector-icons';
-import OrderStack from './OrderStack';
+import { StyleSheet } from 'react-native'
+import { NavigationContainer } from '@react-navigation/native'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import ShopStack from './ShopStack'
+import CartStack from "./CartStack"
+import { colors } from '../Global/colors'
+import { Entypo } from "@expo/vector-icons"
+import OrdersStack from './OrdersStack'
+import TabIcon from '../Components/TabIcon'
 
-
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator()
 
 
 const TabNavigator = () => {
@@ -25,21 +25,21 @@ const TabNavigator = () => {
                     name="ShopStack"
                     component={ShopStack}
                     options={{
-                        tabBarIcon: () => <Entypo name="shop" size={40} color="black" />
+                        tabBarIcon: ({ focused }) => <TabIcon icon="shop" label="Productos" focused={focused} />
                     }}
                 />
                 <Tab.Screen
-                    name="cart"
+                    name="CartStack"
                     component={CartStack}
                     options={{
-                        tabBarIcon: () => <AntDesign name="shoppingcart" size={40} color="black" />
+                        tabBarIcon: ({ focused }) => <TabIcon icon="shopping-cart" label="Carrito" focused={focused} />
                     }}
                 />
                 <Tab.Screen
-                    name="ordersStack"
-                    component={OrderStack}
+                    name="OrdersStack"
+                    component={OrdersStack}
                     options={{
-                        tabBarIcon: () => <Entypo name="add-to-list" size={40} color="black" />
+                        tabBarIcon: ({ focused }) => <TabIcon icon="list" label="Ordenes" focused={focused} />
                     }}
                 />
             </Tab.Navigator>
@@ -51,13 +51,15 @@ export default TabNavigator
 
 const styles = StyleSheet.create({
     tabBar: {
-        backgroundColor: "blue",
+        backgroundColor: colors.green3,
         elevation: 4,
         position: "absolute",
         bottom: 25,
         left: 20,
         right: 20,
-        height: 90,
-        borderRadius: 15
+        borderRadius: 15,
+        height: 90
+
+
     }
 })

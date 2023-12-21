@@ -1,24 +1,24 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import Header from '../Components/Header'
-import Cart from '../Screens/Cart'
+import Orders from '../Screens/Orders'
 
 const Stack = createNativeStackNavigator()
 
-const CartStack = () => {
+const OrdersStack = () => {
     return (
         <Stack.Navigator
-            initialRouteName='Cart'
+            initialRouteName='Orders'
             screenOptions={
                 ({ route }) => {
                     return {
-                        header: () => <Header title="Carrito" />
+                        header: () => <Header title="Ordenes" />
                     }
                 }
             }
         >
-            <Stack.Screen name="Cart" component={Cart} />
+            <Stack.Screen name="Orders" component={Orders} />
         </Stack.Navigator>
     )
 }
 
-export default CartStack
+export default OrdersStack

@@ -1,44 +1,26 @@
 import { StyleSheet, Text, View, Image, Pressable, useWindowDimensions } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import Header from '../../components/Header'
-import allProduct from "../products.json"
+import { useSelector } from 'react-redux'
+
 import { colors } from '../Global/colors'
 
-const ItemDetail = ({route}) => {
-    const {id} = route.params
-    const [product, setProduct] = useState({})
+const ItemDetail = ({ route }) => {
 
-    const { width, height } = useWindowDimensions()
-    const [landscape, setLandscape] = useState(false)
-
-    useEffect(() => {
-        if (width > height) {
-            setLandscape(true)
-        } else {
-            setLandscape(false)
-        }
-    }, [width, height])
-
-    useEffect(() => {
-
-        const productFinded = allProduct.find(product => product.id === id)
-        setProduct(productFinded)
-
-    }, [id])
-
+    const product = useSelector((state) => state.shop.value.productSelected)
+    const images = product.images ? product.images : []
     return (
         <View style={styles.container}>
-            <View style={landscape ? styles.contentLandscape : styles.content} >
+            <View style={styles.content} >
                 <Image
-                    style={landscape ? styles.imageLandscape : styles.image}
-                    source={{ uri: product.thumbnail }}
-                    resizeMode='cover'
+                    style={styles.image}
+                    source={{ uri: images[2] }}
+                    resizeMode='cover' s
                 />
-                <View style={landscape ? styles.containerTextLandscape : styles.containerText}>
+                <View style={styles.containerText}>
                     <Text style={styles.title}>{product.title}</Text>
                     <Text>{product.description}</Text>
                 </View>
-                <View style={landscape ? styles.containerPriceLandscape : styles.containerPrice}>
+                <View style={styles.containerPrice}>
                     <Text style={styles.price}>$ {product.price}</Text>
                     <Pressable style={styles.buyNow}>
                         <Text style={styles.buyNowText}>Buy Now</Text>
@@ -61,19 +43,10 @@ const styles = StyleSheet.create({
     content: {
         width: "100%"
     },
-    contentLandscape: {
-        flexDirection: "row",
-        alignItems: "center",
-        gap: 15,
-        marginVertical: 15
-    },
+
     image: {
         width: "100%",
         height: 300
-    },
-    imageLandscape: {
-        width: 200,
-        height: 200
     },
     goBack: {
         width: "100%",
@@ -81,18 +54,10 @@ const styles = StyleSheet.create({
         padding: 10,
         paddingStart: 40
     },
-    containerTextLandscape: {
-        width: "30%",
-        flexDirection: "column"
-    },
     containerText: {
         gap: 25,
         paddingHorizontal: 5,
         paddingVertical: 25
-    },
-    containerPriceLandscape: {
-        width: "30%",
-        flexDirection: "column"
     },
     containerPrice: {
         width: "100%",
